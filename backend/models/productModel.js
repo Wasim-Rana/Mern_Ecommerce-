@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, "please enter product price"],
-    maxLenght: [8, "price cannot exceed 8 character limit"],
+    maxLength: [8, "price cannot exceed 8 character limit"],
   },
   ratings: {
     type: Number,
@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number,
     required: [true, "Please Enter product of stock"],
-    maxLenght: [4, "cannot exceed 4 digit limit"],
+    maxLength: [4, "cannot exceed 4 digit limit"],
     default: 1,
   },
   numOfReview: {
@@ -77,4 +77,4 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Produt", productSchema);
+module.exports = mongoose.model("Product", productSchema);
