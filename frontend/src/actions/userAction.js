@@ -63,7 +63,7 @@ export const clearErrors = () => async (dispatch) => {
 
 // Register
 
-export const register = (userData) => async (dispatch) => {
+export const registerUser = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
     const config = { headers: { "Content-Type": "multipart/form-data" } };

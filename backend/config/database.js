@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 //db connection
 const connectDatabase = () => {
+  console.log("MONGO_URL from .env:", process.env.MONGO_URL); // Debugging line
+
   mongoose
     .connect(process.env.MONGO_URL, {
       useNewUrlParser: true,

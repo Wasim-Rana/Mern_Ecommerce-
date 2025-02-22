@@ -1,6 +1,7 @@
 const ErrorHandler = require("../utils/errorhandler");
 
 module.exports = (err, req, res, next) => {
+  console.log("Error Middleware Triggered:", err); 
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal Server Error";
   // wrong MongoDB Id error

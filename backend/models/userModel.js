@@ -4,44 +4,30 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
-  role: {
-    type: String,
-    default: "user",
-  },
   name: {
     type: String,
-    required: [true, "Please Enter your name"],
-    maxLen: [30, "name cannot be more than 30 characters"],
-    minLen: [4, "name cannot be less than 4 characters"],
+    required: [true, "Please enter your name"],
   },
   email: {
     type: String,
-    required: [true, "Enter your email"],
-    unique: [true, "Email is already used"],
-    validate: [validator.isEmail, "Enter valid email"],
+    required: [true, "Please enter your email"],
+    unique: true,
   },
   password: {
     type: String,
-    require: [true, "Enter your password"],
-    select: false, //by these will not be show while using .find()
-    minLen: [8, "name cannot be less than 4 characters"],
+    required: [true, "Please enter your password"],
+    minlength: [6, "Password should be at least 6 characters long"],
   },
   avatar: {
     public_id: {
       type: String,
-      required: true,
+      default: "",  // 👈 Allow registration without an avatar
     },
     url: {
       type: String,
-      required: true,
+      default: "",  // 👈 Allow registration without an avatar
     },
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  resetPasswordtoken: String,
-  resetPasswordExpired: Date,
 });
 
 // password hashing

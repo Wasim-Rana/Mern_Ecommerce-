@@ -6,7 +6,7 @@ import { BiUser } from "react-icons/bi";
 import "./LoginSignUp.scss";
 import Profile from "../images/profilePng.png";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login, register } from "../../actions/userAction";
+import { clearErrors, login, registerUser } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import Loader from "../layouts/Loader/Loader";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -37,6 +37,7 @@ const LoginSignUp = () => {
 
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState(Profile);
+  
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -45,15 +46,25 @@ const LoginSignUp = () => {
   };
 
   const registerSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Ensure event is being prevented
+  
     const myForm = new FormData();
-
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
-    myForm.set("avatar", avatar);
-    dispatch(register(myForm));
+  
+    if (avatar) {
+      myForm.append("avatar", avatar); // Append file correctly
+    }
+  
+    console.log("FormData Entries:");
+    for (let [key, value] of myForm.entries()) {
+      console.log(`${key}:`, value); // Debugging: Check if avatar is included
+    }
+  
+    dispatch(registerUser(myForm)); // Ensure this function is correctly defined and imported
   };
+  
 
   const registerDataChange = (e) => {
     if (e.target.name === "avatar") {
@@ -69,6 +80,7 @@ const LoginSignUp = () => {
       setUser({ ...user, [e.target.name]: [e.target.value] });
     }
   };
+
   const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
     if (error) {
@@ -142,7 +154,7 @@ const LoginSignUp = () => {
               <form
                 className="SignUpForm"
                 ref={registerTab}
-                encType="mutipart/form-data"
+                enctype="multipart/form-data"
                 onSubmit={registerSubmit}>
                 <div className="SignUpName">
                   <BiUser />

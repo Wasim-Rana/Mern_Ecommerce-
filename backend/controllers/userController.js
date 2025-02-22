@@ -6,25 +6,48 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 // new user registration
-exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
-  const { name, email, password } = req.body;
-  const user = await User.create({
-    name,
-    email,
-    password,
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
-  });
-  //sending token for login cookie
-  sendtoken(user, 201, res);
-});
+// exports.registerUser = catchAsyncError(async (req, res, next) => {
+//   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+//     folder: "avatars",
+//     width: 150,
+//     crop: "scale",
+//   });
+//   const { name, email, password } = req.body;
+//   const user = await User.create({
+//     name,
+//     email,
+//     password,
+//     avatar: {
+//       public_id: myCloud.public_id,
+//       url: myCloud.secure_url,
+//     },
+//   });
+//   //sending token for login cookie
+//   sendtoken(user, 201, res);
+// });
+exports.registerUser = async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    
+    console.log("Received Data:", req.body); // Debugging
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    res.status(201).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Registration Error:", error); // Debugging
+    error.statusCode = 500; // Ensure error has a status code
+    next(error);
+  }
+};
+
 
 // login user
 
