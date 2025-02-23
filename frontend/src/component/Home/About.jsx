@@ -1,10 +1,10 @@
 import React from "react";
 import "./about.css";
 import { Avatar, Button } from "@material-ui/core";
-import founder from "../images/founder.jpg";
+// import founder from "../images/founder.jpg";
 const About = () => {
   const visitInstagram = () => {
-    window.location = "https://www.instagram.com/sujit_chougule_7/";
+    window.location = "https://www.instagram.com/";
   };
   return (
     <div className="aboutSection">
@@ -15,27 +15,27 @@ const About = () => {
           <div className="midBox">
             <Avatar
               style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-              src={founder}
+              // src={founder}
               alt="Founder"
             />
-            <h2>Sujit Kiran Chougule</h2>
-            <a href="mailto:sujitchougule2003@gmail.com">
+            <h2>Wasim Rana</h2>
+            <a href="mailto:wasimrana2004@gmail.com">
               <Button>
-                <h4>sujitchougule@gmail.com</h4>
+                <h4>wasimrana2004@gmail.com</h4>
               </Button>
             </a>
             <div className="botomLinks">
-              <a href="https://github.com/sujitChougule">GitHub</a>
-              <a href="https://www.linkedin.com/in/sujit-chougule-259932230/">
+              <a href="https://github.com/Wasim-rana">GitHub</a>
+              <a href="https://www.linkedin.com/in/rana-wasim-a2aa53292/">
                 LinkedIn
               </a>
-              <a href="https://www.instagram.com/sujit_chougule_7/">
+              <a href="https://www.instagram.com/">
                 Instagram
               </a>
             </div>
             <div className="para">
               <p>
-                🚀 MERN Stack Wizard 🌐 Hey there! 👋 I'm Sujit Chougule, a
+                🚀 MERN Stack Wizard 🌐 Hey there! 👋 I'm Wasim Rana, a
                 passionate MERN (MongoDB, Express.js, React, Node.js) developer
                 on a mission to craft seamless and dynamic web experiences. 💻✨
                 Whether I'm wrangling data in MongoDB, building with React

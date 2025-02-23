@@ -5,7 +5,10 @@ const cloudinary = require("cloudinary");
 //   require("dotenv").config({ path: "backend/.env" });
 // }
 
-require("dotenv").config({ path: "backend/.env" });
+require("dotenv").config({ path: ".env" });
+console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
+console.log("MONGO_URL from .env:", process.env.MONGO_URL);
+console.log("PORT from .env:", process.env.PORT);
 //connecting db
 const connectDatabase = require("./config/database");
 connectDatabase();

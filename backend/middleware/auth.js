@@ -9,9 +9,17 @@ exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   if (!token) {
     return next(new ErrorHandler("Please LogIn to for following resorce", 401));
   }
-  const decodeData = jwt.verify(token, process.env.JWT_SECRETE);
-  req.user = await User.findById(decodeData.id);
-  next();
+  try {
+    // Check if JWT_SECRET exists
+    if (!process.env.JWT_SECRET) {
+      return next(new ErrorHandler("JWT_SECRET is missing in environment variables", 500));
+  }
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decodedData.id);
+    next();
+} catch (error) {
+    return next(new ErrorHandler("Invalid token, please log in again", 401));
+}
 });
 
 // to check Athorized admin
