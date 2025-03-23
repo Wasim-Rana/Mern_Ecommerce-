@@ -4,9 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
+yarn.lock
 
 # testing
 /coverage
+
+# Environment variables
+.env
 
 # production
 # /build
@@ -21,3 +26,41 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Build files
+/dist
+/build
+/.parcel-cache
+/.next
+/out
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor/IDE settings
+.vscode/
+.idea/
+.DS_Store
+
+# Static files and generated content
+/static
+/public/assets
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Strapi specific
+/database
+/.tmp
+/.cache
+/uploads
+
+# Cloudinary and image uploads
+/cloudinary-cache
+/uploads/

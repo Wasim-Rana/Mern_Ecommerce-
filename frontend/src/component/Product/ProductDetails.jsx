@@ -22,13 +22,18 @@ import {
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstant";
+
+
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
+console.log("Product ID from URL:", id);
+
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+
 
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview

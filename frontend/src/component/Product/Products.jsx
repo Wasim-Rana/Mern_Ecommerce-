@@ -14,11 +14,10 @@ import NoDataImg from "../images/nodata.png";
 
 const categories = [
   "Shirts",
-  "Laptop",
+  "Laptops",
   "Footwear",
   "Bottom",
   "Tops",
-  "Attire",
   "Camera",
   "SmartPhones",
 ];
@@ -42,13 +41,25 @@ const Products = () => {
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
   };
+  // useEffect(() => {
+  //   if (error) {
+  //     alert.error(error);
+  //     dispatch(clearErrors());
+  //   }
+  //   dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  // }, [dispatch, keyword, currentPage, price, category, ratings, error, alert]);
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
+    
+    console.log("Products from API:", products); // Debugging line
+  
   }, [dispatch, keyword, currentPage, price, category, ratings, error, alert]);
+  
 
   return (
     <Fragment>
