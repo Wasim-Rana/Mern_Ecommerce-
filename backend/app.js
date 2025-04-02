@@ -6,11 +6,18 @@ const fileUpload = require("express-fileupload");
 const errorMiddleware = require("./middleware/error");
 const path = require("path");
 app.use(express.json());
-
+const cors = require("cors");
 //config env
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests from frontend
+    credentials: true, // Allow cookies and authorization headers
+  })
+);
 //to use cookie use cookie Parser
 app.use(cookieParser());
 

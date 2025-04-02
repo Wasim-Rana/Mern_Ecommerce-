@@ -1,20 +1,28 @@
+require("dotenv").config({ path: ".env" });
+
 const app = require("./app");
 const cloudinary = require("cloudinary");
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 //config env
 // if (process.env.NODE_ENV !== "PRODUCTION") {
 //   require("dotenv").config({ path: "backend/.env" });
 // }
 
-require("dotenv").config({ path: ".env" });
+
+
 console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 console.log("MONGO_URL from .env:", process.env.MONGO_URL);
 console.log("PORT from .env:", process.env.PORT);
+console.log("STRIPE_API_KEY:", process.env.STRIPE_API_KEY);
+console.log("STRIPE_SECRET:", process.env.STRIPE_SECRET);
+
 //connecting db
 const connectDatabase = require("./config/database");
 connectDatabase();
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
@@ -44,3 +52,5 @@ process.on("unhandledRejection", (err) => {
     process.exit(1);
   });
 });
+
+

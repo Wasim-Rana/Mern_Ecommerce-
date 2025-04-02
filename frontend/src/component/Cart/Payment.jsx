@@ -30,6 +30,7 @@ const Payment = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { error } = useSelector((state) => state.newOrder);
+  const token = localStorage.getItem("token"); 
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
@@ -42,28 +43,110 @@ const Payment = () => {
     shippingPrice: orderInfo.shippingCharges,
     totalPrice: orderInfo.totalPrice,
   };
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   payBtn.current.disabled = true;
+  //   try {
+  //     const config = {
+  //       withCredentials: true,
+  //       Headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
+
+  //     const { data } = await axios.post(
+  //       "http://localhost:5000/api/v1/payment/process",
+  //       paymentData,
+  //       config
+  //     );
+
+  //     console.log("Payment API response:", data); // Debug API response
+
+  //   if (!response.data || !response.data.client_secret) {
+  //     throw new Error("Failed to get client_secret from backend.");
+  //   }
+  //     const client_secret = data.client_secret;
+
+  //     if (!stripe || !element) return;
+
+  //     const result = await stripe.confirmCardPayment(client_secret, {
+  //       payment_method: {
+  //         card: element.getElement(CardNumberElement),
+  //         billing_details: {
+  //           name: user.name,
+  //           email: user.email,
+  //           address: {
+  //             line1: shippingInfo.address,
+  //             city: shippingInfo.city,
+  //             state: shippingInfo.state,
+  //             postal_code: shippingInfo.pinCode,
+  //             country: shippingInfo.country,
+  //           },
+  //         },
+  //       },
+  //     });
+
+  //     if (result.error) {
+  //       payBtn.current.disable = false;
+  //       alert.error(result.error.message);
+        
+  //     } else {
+  //       if (result.paymentIntent.status === "succeeded") {
+  //         order.paymentInfo = {
+  //           id: result.paymentIntent.id,
+  //           status: result.paymentIntent.status,
+  //         };
+  //         dispatch(createOrder(order));
+  //         alert.success("Payment successfull");
+
+  //         navigate("/success");
+  //       } else {
+  //         alert.error("There's some issue while processing payment ");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     payBtn.current.disable = false;
+  //     alert.error(error.response.data.message);
+  //   }
+  // };
   const submitHandler = async (e) => {
     e.preventDefault();
-    payBtn.current.disable = true;
+    payBtn.current.disabled = true;
     try {
       const config = {
-        Headers: {
-          "Content-Type": "application/js",
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
       };
+      console.log("Token being sent:", token);
 
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "http://localhost:5000/api/v1/payment/process",
         paymentData,
         config
       );
+  
+      console.log("Payment API response:", data);
+  
+      if (!data || !data.client_secret) {
+        throw new Error("Failed to get client_secret from backend.");
+      }
       const client_secret = data.client_secret;
-
+  
       if (!stripe || !element) return;
-
+  
+      const cardElement = element.getElement(CardNumberElement);
+      if (!cardElement) {
+        alert.error("Please fill in the card details correctly.");
+        payBtn.current.disabled = false;
+        return;
+      }
+  
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
-          card: element.getElement(CardNumberElement),
+          card: cardElement,
           billing_details: {
             name: user.name,
             email: user.email,
@@ -77,11 +160,10 @@ const Payment = () => {
           },
         },
       });
-
+  
       if (result.error) {
-        payBtn.current.disable = false;
+        payBtn.current.disabled = false;
         alert.error(result.error.message);
-        // console.log("sujit here", result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymentInfo = {
@@ -89,18 +171,23 @@ const Payment = () => {
             status: result.paymentIntent.status,
           };
           dispatch(createOrder(order));
-          alert.success("Payment successfull");
-
+          alert.success("Payment successful");
+  
           navigate("/success");
         } else {
-          alert.error("There's some issue while processing payment ");
+          alert.error("There's some issue while processing payment.");
         }
       }
     } catch (error) {
-      payBtn.current.disable = false;
-      alert.error(error.response.data.message);
+      payBtn.current.disabled = false;
+      alert.error(
+        error.response && error.response.data
+          ? error.response.data.message
+          : "Payment failed. Please try again."
+      );
     }
   };
+  
   useEffect(() => {
     if (error) {
       alert.error(error);

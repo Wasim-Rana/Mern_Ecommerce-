@@ -43,10 +43,16 @@ import theme from "./component/other/theme.js";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
+  // const cors = require("cors");
+
+  // app.use(cors({
+  //   origin: "http://localhost:3000", // Adjust for frontend URL
+  //   credentials: true
+  // }));
 
   async function getStripeApiKey() {
     try {
-      const { data } = await axios.get("/api/v1/stripeapikey");
+      const { data } = await axios.get("/api/v1/stripeapikey", { withCredentials: true });
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
       console.error("Error fetching Stripe API key:", error);
@@ -107,7 +113,8 @@ function App() {
             path="/process/payment"
             element={
               <Elements stripe={loadStripe(`${stripeApiKey}`)}>
-                <Payment />{" "}
+                <Payment/>
+                {/* {" "} */}
               </Elements>
             }
           />
