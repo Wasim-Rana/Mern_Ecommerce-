@@ -1,9 +1,10 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 //db connection
 const connectDatabase = () => {
   console.log("MONGO_URL from .env:", process.env.MONGO_URL); // Debugging line
-  require("dotenv").config();
+  // require("dotenv").config();
 console.log("JWT_SECRET from .env:", process.env.JWT_SECRET);
 
 
