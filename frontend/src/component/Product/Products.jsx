@@ -61,7 +61,7 @@
             <MetaDate title="Products --ShopNest" />
             <h2 className="productsHeading">Products</h2>
             <div className="Products">
-              {products.length > 0 ? (
+            {Array.isArray(products) && products.length > 0 ? (
                 products.map((product) => (
                   <ProductCard key={product._id} product={product} />
                 ))
@@ -114,7 +114,8 @@
               </fieldset>
             </div>
             <div className="paginationBox">
-              {products.length > 0 ? (
+              {Array.isArray(products) && products.length > 0 ? (
+
                 <Pagination
                   activePage={currentPage}
                   itemsCountPerPage={resultPerPage}

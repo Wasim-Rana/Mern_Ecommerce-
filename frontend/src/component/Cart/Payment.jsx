@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layouts/MetaDate";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useAlert } from "react-alert";
 import {
   CardNumberElement,

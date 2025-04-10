@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import MetaData from "../layouts/MetaDate";
 import "./styles/ConfirmOrder.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();
