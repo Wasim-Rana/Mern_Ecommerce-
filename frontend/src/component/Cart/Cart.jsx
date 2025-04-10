@@ -6,8 +6,8 @@ import {
   addToCartItems,
   removeItemsFromCart,
 } from "../../actions/cartAction.js";
-import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart.js";
-import { Typography } from "@material-ui/core";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import { Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaDate from "../layouts/MetaDate";
-import LaunchIcon from "@material-ui/icons/Launch";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const MyOrders = () => {
   const dispatch = useDispatch();

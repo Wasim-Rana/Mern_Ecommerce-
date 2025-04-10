@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layouts/Loader/Loader";
 import { useAlert } from "react-alert";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { Button } from "@material-ui/core";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstant";
 import "./processOrder.css";

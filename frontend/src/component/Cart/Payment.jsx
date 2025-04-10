@@ -14,9 +14,9 @@ import {
 
 import axios from "axios";
 import "./styles/payment.css";
-import CreditCardIcon from "@material-ui/icons/CreditCard";
-import EventIcon from "@material-ui/icons/Event";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import EventIcon from "@mui/icons-material/Event";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
 import { useNavigate } from "react-router-dom";
 const Payment = () => {

@@ -17,8 +17,7 @@
     "Footwear",
     "Bottom",
     "Tops",
-    "Camera",
-    "SmartPhones",
+    // "Hoodies"
   ];
 
   const Products = () => {

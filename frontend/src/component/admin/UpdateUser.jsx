@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaDate from "../layouts/MetaDate";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import PersonIcon from "@material-ui/icons/Person";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PersonIcon from "@mui/icons-material/Person";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import SideBar from "./Sidebar";
 import { UPDATE_USER_RESET } from "../../constants/userConstants";
 import {

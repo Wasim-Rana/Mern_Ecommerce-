@@ -7,9 +7,9 @@ import Loader from "../layouts/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { USER_PASSWORD_RESET } from "../../constants/userConstants";
 import MetaData from "../layouts/MetaDate";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import LockIcon from "@material-ui/icons/Lock";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();

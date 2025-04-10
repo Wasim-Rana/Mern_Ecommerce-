@@ -139,22 +139,22 @@ function App() {
           <Route exact path="/admin/product" element={<NewProduct />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/product/:id" element={<UpdateProduct />} />
+          <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/orders" element={<OrderList />} />
+          <Route exact path="/admin/orders" element={<OrderList />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/order/:id" element={<ProcessOrder />} />
+          <Route exact path="/admin/order/:id" element={<ProcessOrder />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/users" element={<UsersList />} />
+          <Route exact path="/admin/users" element={<UsersList />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/user/:id" element={<UpdateUser />} />
+          <Route exact path="/admin/user/:id" element={<UpdateUser />} />
         )}
         {isAuthenticated && user.role === "admin" && (
-          <Route exact path="admin/reviews" element={<ProductReviews />} />
+          <Route exact path="/admin/reviews" element={<ProductReviews />} />
         )}
       </Routes>
       <Footer />
