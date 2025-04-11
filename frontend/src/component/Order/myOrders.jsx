@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./myOrders.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, myOrders } from "../../actions/orderAction";
 import Loader from "../layouts/Loader/Loader";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import MetaDate from "../layouts/MetaDate";
 import LaunchIcon from "@mui/icons-material/Launch";
 
@@ -20,16 +20,14 @@ const MyOrders = () => {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
-
+  
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        return params.row.status === "Delivered" ? "greenColor" : "redColor";
       },
     },
     {
@@ -39,7 +37,7 @@ const MyOrders = () => {
       minWidth: 150,
       flex: 0.3,
     },
-
+  
     {
       field: "amount",
       headerName: "Amount",
@@ -47,7 +45,7 @@ const MyOrders = () => {
       minWidth: 270,
       flex: 0.5,
     },
-
+  
     {
       field: "actions",
       flex: 0.3,
@@ -57,13 +55,14 @@ const MyOrders = () => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
-            <LaunchIcon />
-          </Link>
+          <Link to={`/order/${params.row.id}`}>
+              <LaunchIcon style={{ cursor: "pointer", color: "#3f51b5" }} /> 
+         </Link>
         );
       },
     },
   ];
+  
   const rows = [];
 
   orders &&
@@ -98,6 +97,7 @@ const MyOrders = () => {
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
+            getRowId={(row) => row.id} 
             className="myOrdersTable"
             autoHeight
           />

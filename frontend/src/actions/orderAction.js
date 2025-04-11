@@ -44,6 +44,7 @@ export const createOrder = (order) => async (dispatch) => {
   }
 };
 // for clearing errors
+
 export const clearErrors = () => async (dispatch) => {
   dispatch({
     type: CLEAR_ERRORS,
@@ -125,13 +126,18 @@ export const deleteOrder = (id) => async (dispatch) => {
 
 // Get Order Details
 export const getOrderDetails = (id) => async (dispatch) => {
+  console.log("🚀 ACTION getOrderDetails FIRED with id:", id); // Debug
+
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
     const { data } = await axios.get(`/api/v1/order/${id}`);
+    console.log("✅ API RESPONSE:", data); // Debug
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {
+    console.error("❌ ERROR IN getOrderDetails:", error.response?.data?.message || error.message); // Debug
+
     dispatch({
       type: ORDER_DETAILS_FAIL,
       payload: error.response.data.message,

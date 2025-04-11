@@ -3,7 +3,7 @@ import "./orderDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaDate from "../layouts/MetaDate";
 import { Link, useParams } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { getOrderDetails, clearErrors } from "../../actions/orderAction";
 import Loader from "../layouts/Loader/Loader";
 import { useAlert } from "react-alert";
@@ -15,6 +15,8 @@ const OrderDetails = () => {
   const alert = useAlert();
 
   useEffect(() => {
+    console.log("🧠 useEffect triggered with ID:", id); // Debug
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
