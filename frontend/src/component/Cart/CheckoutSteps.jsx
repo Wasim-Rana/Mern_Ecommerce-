@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Typography, Stepper, StepLabel, Step } from "@mui/material";
+import { Typography, Stepper, StepLabel, Step, Box } from "@mui/material";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -9,15 +9,15 @@ const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
       label: <Typography>Shipping Details</Typography>,
-      icon: <LocalShippingIcon />,
+      icon: LocalShippingIcon,
     },
     {
       label: <Typography>Confirm Order</Typography>,
-      icon: <LibraryAddCheckIcon />,
+      icon: LibraryAddCheckIcon,
     },
     {
       label: <Typography>Payment</Typography>,
-      icon: <AccountBalanceIcon />,
+      icon: AccountBalanceIcon,
     },
   ];
 
@@ -26,23 +26,26 @@ const CheckoutSteps = ({ activeStep }) => {
   };
 
   return (
-    <Fragment className="StepCheckOut">
-      <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
-        {steps.map((item, index) => (
-          <Step
-            key={index}
-            active={activeStep === index ? true : false}
-            completed={activeStep >= index ? true : false}>
-            <StepLabel
-              style={{
-                color: activeStep >= index ? "#3498db" : "rgba(0, 0, 0, 0.649)",
-              }}
-              icon={item.icon}>
-              {item.label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    <Fragment>
+      <Box className="StepCheckOut" sx={{ mt: 10, px: 2, zIndex: 1, position: "relative" }}>
+  <Stepper alternativeLabel activeStep={activeStep} style={stepStyles}>
+    {steps.map((item, index) => (
+      <Step
+        key={index}
+        active={activeStep === index}
+        completed={activeStep > index}>
+        <StepLabel
+          StepIconComponent={item.icon}
+          sx={{
+            color: activeStep >= index ? "#3498db" : "rgba(0, 0, 0, 0.649)",
+          }}>
+          {item.label}
+        </StepLabel>
+      </Step>
+    ))}
+  </Stepper>
+</Box>
+
     </Fragment>
   );
 };
