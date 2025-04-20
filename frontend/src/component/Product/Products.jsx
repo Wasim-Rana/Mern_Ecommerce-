@@ -17,7 +17,8 @@
     "Footwear",
     "Bottom",
     "Tops",
-    // "Hoodies"
+    "Hoodies",
+    "Denims"
   ];
 
   const Products = () => {
