@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const User = require("./models/userModel"); // Ensure this path is correct
+const User = require("./models/userModel"); 
 
 // Connect to MongoDB
 mongoose.connect("mongodb://localhost:27017/ecom", {
@@ -11,11 +11,11 @@ mongoose.connect("mongodb://localhost:27017/ecom", {
 // Function to create an admin user
 const createAdmin = async () => {
   try {
-    const hashedPassword = await bcrypt.hash("admin123", 10); // Hash password
+    // const hashedPassword = await bcrypt.hash("admin123", 10); // Hash password
     const adminUser = new User({
       name: "Admin User",
       email: "admin@gmail.com",
-      password: hashedPassword,
+      password: "admin123",
       role: "admin",
     });
 
