@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
       default: "",  // 👈 Allow registration without an avatar
     },
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
 });
 
 // password hashing

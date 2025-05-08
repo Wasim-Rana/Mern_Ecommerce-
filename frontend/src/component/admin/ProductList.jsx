@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,7 +9,7 @@ import {
 } from "../../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaDate from "../layouts/MetaDate.jsx";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -86,7 +86,7 @@ const ProductList = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/product/${params.row.id}`}>
               <EditIcon />
             </Link>
 

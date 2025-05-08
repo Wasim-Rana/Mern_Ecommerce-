@@ -1,6 +1,6 @@
 import React from "react";
 import "./about.css";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button } from "@mui/material";
 // import founder from "../images/founder.jpg";
 const About = () => {
   const visitInstagram = () => {

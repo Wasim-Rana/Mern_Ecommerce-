@@ -3,7 +3,7 @@ import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, createProduct } from "../../actions/productAction";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaDate from "../layouts/MetaDate.jsx";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -30,13 +30,11 @@ const NewProduct = () => {
 
   const categories = [
     "Shirts",
-    "Laptop",
     "Footwear",
     "Bottom",
     "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Hoodies",
+    "Denims"
   ];
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaDate from "../layouts/MetaDate";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -51,7 +51,7 @@ const UsersList = () => {
 
   const columns = [
     { field: "id", headerName: "User ID", minWidth: 180, flex: 0.8 },
-
+  
     {
       field: "email",
       headerName: "Email",
@@ -64,7 +64,7 @@ const UsersList = () => {
       minWidth: 150,
       flex: 0.5,
     },
-
+  
     {
       field: "role",
       headerName: "Role",
@@ -72,12 +72,10 @@ const UsersList = () => {
       minWidth: 150,
       flex: 0.3,
       cellClassName: (params) => {
-        return params.getValue(params.id, "role") === "admin"
-          ? "greenColor"
-          : "redColor";
+        return params.row.role === "admin" ? "greenColor" : "redColor";
       },
     },
-
+  
     {
       field: "actions",
       flex: 0.3,
@@ -88,14 +86,11 @@ const UsersList = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/user/${params.row.id}`}>
               <EditIcon />
             </Link>
-
-            <Button
-              onClick={() =>
-                deleteUserHandler(params.getValue(params.id, "id"))
-              }>
+  
+            <Button onClick={() => deleteUserHandler(params.row.id)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -103,7 +98,6 @@ const UsersList = () => {
       },
     },
   ];
-
   const rows = [];
 
   users &&

@@ -7,6 +7,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
+  if (isAdmin === true && user.role !== "admin") {
+    return <Navigate to="/login" />; // or redirect to home
+  }
   return loading === false ? <Component {...rest} /> : null;
 };
 

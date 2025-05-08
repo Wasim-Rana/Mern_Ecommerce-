@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaDate from "../layouts/MetaDate";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -51,16 +51,14 @@ const OrderList = () => {
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
-
+  
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        return params.row.status === "Delivered" ? "greenColor" : "redColor";
       },
     },
     {
@@ -70,7 +68,7 @@ const OrderList = () => {
       minWidth: 150,
       flex: 0.4,
     },
-
+  
     {
       field: "amount",
       headerName: "Amount",
@@ -78,7 +76,7 @@ const OrderList = () => {
       minWidth: 270,
       flex: 0.5,
     },
-
+  
     {
       field: "actions",
       flex: 0.3,
@@ -89,14 +87,11 @@ const OrderList = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/order/${params.row.id}`}>
               <EditIcon />
             </Link>
-
-            <Button
-              onClick={() =>
-                deleteOrderHandler(params.getValue(params.id, "id"))
-              }>
+  
+            <Button onClick={() => deleteOrderHandler(params.row.id)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -104,7 +99,6 @@ const OrderList = () => {
       },
     },
   ];
-
   const rows = [];
 
   orders &&

@@ -16,7 +16,7 @@ const LoginSignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const alert = useAlert();
-  const { error, loading, isAuthenticated } = useSelector(
+  const { error, loading, isAuthenticated, user: reduxUser } = useSelector(
     (state) => state.user
   );
 
@@ -87,10 +87,15 @@ const LoginSignUp = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
+  
     if (isAuthenticated) {
-      navigate(redirect);
+      if (reduxUser.role === "admin") {
+        navigate("/admin/dashboard"); // ✅ Admin dashboard
+      } else {
+        navigate("/account"); // ✅ User profile
+      }
     }
-  }, [dispatch, alert, error, isAuthenticated, navigate, redirect]);
+  }, [dispatch, error, alert, isAuthenticated, reduxUser, navigate]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -154,7 +159,7 @@ const LoginSignUp = () => {
               <form
                 className="SignUpForm"
                 ref={registerTab}
-                enctype="multipart/form-data"
+                encType="multipart/form-data"
                 onSubmit={registerSubmit}>
                 <div className="SignUpName">
                   <BiUser />

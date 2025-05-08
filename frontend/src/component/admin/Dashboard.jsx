@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar.jsx";
 import "./dashboard.css";
-import { Typography } from "@material-ui/core";
+import Typography  from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
